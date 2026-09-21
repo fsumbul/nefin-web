@@ -1,0 +1,18 @@
+.acc { border-top: 1px solid var(--line); margin-top: 0.6rem; }
+.item { border-bottom: 1px solid var(--line); }
+.summary {
+  display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+  padding: 1.05rem 0; cursor: pointer; list-style: none;
+  font-size: var(--step-0); color: var(--espresso);
+}
+.summary::-webkit-details-marker { display: none; }
+.summary i { position: relative; width: 12px; height: 12px; flex: none; }
+.summary i::before, .summary i::after {
+  content: ""; position: absolute; inset: 50% 0 auto 0; height: 1px; background: var(--taupe);
+  transition: transform 0.35s var(--ease), opacity 0.35s var(--ease);
+}
+.summary i::after { transform: rotate(90deg); }
+.item[open] .summary i::after { transform: rotate(0deg); opacity: 0; }
+.body { padding-bottom: 1.2rem; display: grid; gap: 0.5rem; color: var(--muted); font-size: var(--step--1); line-height: 1.75; }
+.bullet { padding-left: 1.1em; position: relative; }
+.bullet::before { content: "—"; position: absolute; left: 0; color: var(--gold-deep); }

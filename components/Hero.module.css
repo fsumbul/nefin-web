@@ -1,0 +1,94 @@
+.hero { height: 230vh; position: relative; }
+
+.sticky {
+  position: sticky;
+  top: 0;
+  height: 100svh;
+  display: grid;
+  align-items: center;
+  overflow: hidden;
+}
+
+/* Canvas'ın kesin bir ölçüsü olmalı; grid ile shrink-to-fit olursa
+   R3F 300x150 varsayılanına düşer ve sahne hiç görünmez. */
+/* Masaüstünde şişe sağ yarıda durur; metin sol tarafta okunaklı kalır. */
+.stageWrap { position: absolute; inset: 0 0 0 44%; }
+
+.stage { position: absolute; inset: 0; width: 100%; height: 100%; }
+
+.poster {
+  position: absolute;
+  left: 50%;
+  top: 52%;
+  translate: -50% -50%;
+  width: min(70vw, 32rem);
+  height: auto;
+  object-fit: contain;
+  mix-blend-mode: multiply;
+}
+
+.copy {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  justify-items: start;
+  text-align: left;
+  gap: 1.1rem;
+  max-width: 34rem;
+  pointer-events: none;
+}
+.copy > * { pointer-events: auto; }
+
+.eyebrow { margin-bottom: 0.4rem; }
+
+.title {
+  font-size: var(--step-4);
+  line-height: 0.98;
+  letter-spacing: -0.015em;
+  text-shadow: 0 1px 40px color-mix(in srgb, var(--ink) 70%, transparent);
+}
+
+.lede {
+  max-width: 34ch;
+  color: var(--taupe);
+  font-size: var(--step-0);
+}
+
+.actions { display: flex; flex-wrap: wrap; gap: 0.7rem; margin-top: 0.6rem; }
+
+.scrollHint {
+  position: absolute;
+  bottom: clamp(1.2rem, 4vh, 2.4rem);
+  left: max(var(--gutter), calc((100vw - var(--max)) / 2));
+  display: grid;
+  justify-items: center;
+  gap: 0.6rem;
+  font-size: 0.68rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--taupe);
+  z-index: 2;
+}
+.scrollHint i {
+  width: 1px;
+  height: 2.6rem;
+  background: linear-gradient(var(--soft), transparent);
+  animation: drop 2.4s var(--ease) infinite;
+  transform-origin: top;
+}
+@keyframes drop {
+  0% { scale: 1 0.2; opacity: 0; }
+  35% { scale: 1 1; opacity: 1; }
+  100% { scale: 1 1; opacity: 0; }
+}
+
+@media (max-width: 860px) {
+  .hero { height: 190vh; }
+  .title { font-size: clamp(2.4rem, 11vw, 3.4rem); }
+  .sticky { place-items: center; }
+  /* Dar ekranda şişe metnin arkasına geçer, metin ortalanır. */
+  .stageWrap { inset: 0; opacity: 0.5; }
+  .copy { justify-items: center; text-align: center; max-width: none; }
+  .actions { justify-content: center; }
+  .scrollHint { left: 50%; translate: -50% 0; }
+}

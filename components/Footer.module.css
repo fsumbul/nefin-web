@@ -1,0 +1,16 @@
+.footer { background: var(--espresso); color: var(--sand); padding: clamp(3.5rem, 8vw, 6rem) 0 2rem; margin-top: clamp(4rem, 10vw, 8rem); }
+.inner { display: grid; gap: clamp(2rem, 5vw, 4rem); grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.6fr); align-items: start; }
+.brand { display: grid; gap: 1rem; }
+.mark { font-family: var(--font-display), serif; font-size: 1.6rem; letter-spacing: 0.3em; color: var(--ink); }
+.note { color: color-mix(in srgb, var(--sand) 70%, transparent); font-size: var(--step--1); max-width: 34ch; line-height: 1.7; }
+.cols { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 2rem; }
+.cols > div { display: grid; gap: 0.55rem; align-content: start; }
+.cols h4 { color: var(--gold); font-size: 0.68rem; letter-spacing: 0.22em; text-transform: uppercase; font-family: var(--font-body), sans-serif; margin-bottom: 0.35rem; }
+.cols a { color: color-mix(in srgb, var(--sand) 82%, transparent); font-size: var(--step--1); transition: color 0.3s var(--ease); }
+.cols a:hover { color: var(--ink); }
+.legal { display: flex; flex-wrap: wrap; gap: 1rem; justify-content: space-between; margin-top: clamp(2.5rem, 6vw, 4rem); padding-top: 1.4rem; border-top: 1px solid color-mix(in srgb, var(--sand) 18%, transparent); font-size: 0.72rem; color: color-mix(in srgb, var(--sand) 60%, transparent); }
+.wip { color: var(--gold); }
+@media (max-width: 760px) {
+  .inner { grid-template-columns: 1fr; }
+  .cols { grid-template-columns: repeat(2, 1fr); }
+}

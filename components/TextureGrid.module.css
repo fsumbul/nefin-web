@@ -1,0 +1,15 @@
+.section { padding: clamp(4rem, 10vw, 8rem) 0; background: var(--espresso); color: var(--sand); }
+.section :global(.eyebrow) { color: var(--gold); }
+.h2 { font-size: var(--step-3); color: var(--ink); margin-bottom: clamp(1.8rem, 4vw, 2.8rem); }
+.grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: clamp(0.6rem, 1.5vw, 1.1rem); list-style: none; padding-left: 0; margin: 0; }
+.grid li { position: relative; overflow: hidden; }
+.grid video { width: 100%; aspect-ratio: 3 / 4; object-fit: cover; filter: saturate(0.98); }
+.caption {
+  position: absolute; inset: auto 0 0 0;
+  display: grid; gap: 0.15rem;
+  padding: 1.6rem 1rem 1rem;
+  background: linear-gradient(transparent, rgba(12, 8, 6, 0.75));
+}
+.caption strong { font-family: var(--font-display), serif; font-weight: 400; font-size: var(--step-0); color: var(--ink); }
+.caption span { font-size: 0.72rem; color: color-mix(in srgb, var(--sand) 75%, transparent); }
+@media (max-width: 900px) { .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }

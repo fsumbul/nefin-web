@@ -1,49 +1,129 @@
+/* Nefin Beauty — tasarım sistemi
+   Kaynak: 01-Presentations/_themes/nefin-luxe-cream.css (eylül sunumunda onaylanan yön).
+   Krem/fildişi/bej + soft altın + espresso. Bordo/kadife ve siyah lüks-gece YOK
+   (marka brief'i, 5. bölüm "KESİNLİKLE OLMAYACAK"). */
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --ink: #f6efe4;
+  --sand: #eadbc8;
+  --soft: #cdbba5;
+  --gold: #d9b36c;
+  --gold-deep: #86622a;
+  --taupe: #6b564b;
+  --dark: #3b2a22;
+  --espresso: #1e1410;
+
+  --bg: var(--ink);
+  --fg: var(--dark);
+  --muted: var(--taupe);
+  --line: color-mix(in srgb, var(--soft) 55%, transparent);
+
+  --step--1: clamp(0.78rem, 0.76rem + 0.1vw, 0.85rem);
+  --step-0: clamp(0.95rem, 0.92rem + 0.15vw, 1.05rem);
+  --step-1: clamp(1.15rem, 1.05rem + 0.5vw, 1.45rem);
+  --step-2: clamp(1.5rem, 1.25rem + 1.2vw, 2.25rem);
+  --step-3: clamp(2rem, 1.4rem + 2.8vw, 3.6rem);
+  --step-4: clamp(2.6rem, 1.5rem + 5vw, 6rem);
+
+  --gutter: clamp(1.25rem, 4vw, 4rem);
+  --max: 78rem;
+  --radius: 2px;
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
+*,
+*::before,
+*::after { box-sizing: border-box; }
 
-html {
-  height: 100%;
-}
+html { -webkit-text-size-adjust: 100%; }
 
-html,
 body {
-  max-width: 100vw;
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-body), "Helvetica Neue", Arial, sans-serif;
+  font-weight: 300;
+  font-size: var(--step-0);
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
 }
 
-body {
-  min-height: 100%;
-  display: flex;
-  flex-direction: column;
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-* {
-  box-sizing: border-box;
-  padding: 0;
+h1, h2, h3, h4 {
+  font-family: var(--font-display), Georgia, "Times New Roman", serif;
+  font-weight: 400;
+  color: var(--espresso);
+  letter-spacing: 0.01em;
+  line-height: 1.08;
   margin: 0;
+  text-wrap: balance;
 }
 
-a {
-  color: inherit;
-  text-decoration: none;
+p { margin: 0; text-wrap: pretty; }
+a { color: inherit; text-decoration: none; }
+img, video, canvas { display: block; max-width: 100%; }
+button { font: inherit; color: inherit; }
+
+::selection { background: var(--gold); color: var(--espresso); }
+
+:focus-visible {
+  outline: 2px solid var(--gold-deep);
+  outline-offset: 3px;
 }
 
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
+/* --- yardımcılar --- */
+.wrap { width: min(100% - var(--gutter) * 2, var(--max)); margin-inline: auto; }
+.eyebrow {
+  font-size: var(--step--1);
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--gold-deep);
+  font-weight: 400;
+}
+.lede { font-size: var(--step-1); color: var(--muted); font-weight: 300; }
+.muted { color: var(--muted); }
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6em;
+  padding: 0.95em 2.1em;
+  border: 1px solid var(--espresso);
+  border-radius: 999px;
+  background: var(--espresso);
+  color: var(--ink);
+  font-size: var(--step--1);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background 0.4s var(--ease), color 0.4s var(--ease), transform 0.4s var(--ease);
+}
+.btn:hover { background: transparent; color: var(--espresso); transform: translateY(-1px); }
+.btn--ghost { background: transparent; color: var(--espresso); border-color: color-mix(in srgb, var(--espresso) 30%, transparent); }
+.btn--ghost:hover { background: var(--espresso); color: var(--ink); }
+.btn--light { background: var(--ink); color: var(--espresso); border-color: var(--ink); }
+.btn--light:hover { background: transparent; color: var(--ink); }
+
+/* --- scroll ile beliren öğeler --- */
+.reveal {
+  opacity: 0;
+  transform: translateY(1.6rem);
+  transition: opacity 1s var(--ease), transform 1s var(--ease);
+  transition-delay: var(--delay, 0ms);
+}
+.reveal.is-in { opacity: 1; transform: none; }
+
+.visually-hidden {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip-path: inset(50%); white-space: nowrap;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal { opacity: 1; transform: none; transition: none; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }

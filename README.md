@@ -1,36 +1,49 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Nefin Beauty — 3D scroll web sitesi
 
-## Getting Started
+Marka sitesi: Next.js 16 (App Router) + TypeScript + React Three Fiber.
+Plan ve strateji: `icerik-vault/02-Websites/projects/nefin-beauty/nefin-web-3d-plani.md`.
 
-First, run the development server:
+## Çalıştırma
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+npm run dev     # http://localhost:3000
+npm run build && npx next start
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## İçerik nereden geliyor?
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Sitedeki **hiçbir pazarlama metni üretilmemiştir**; tamamı müşterinin kendi kaynaklarından alınır:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| Veri | Kaynak | Yenileme |
+|---|---|---|
+| Ürünler, fiyatlar, faydalar, kullanım, INCI | canlı nefinbeauty.com | `python3 scripts/scrape-catalog.py` → `content/products.json` |
+| Hakkımızda metni, cilt endişeleri | nefinbeauty.com/hakkimizda ve ana sayfa | `content/site.ts` (elle) |
+| Ürün/doku videoları, editoryal görseller | `icerik-vault/03-Assets/.../nefin-beauty` | `node scripts/prepare-assets.mjs` |
 
-## Learn More
+`prepare-assets.mjs` görselleri sharp ile webp+avif'e, videoları ffmpeg ile 1280px h264'e çevirir
+ve poster kareleri üretir. `VAULT=/yol/icerik-vault` ile vault yolu değiştirilebilir.
 
-To learn more about Next.js, take a look at the following resources:
+## 3D
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+`components/scene/` — amber damlalıklı şişe **prosedürel** olarak modellenmiştir (LatheGeometry +
+MeshTransmissionMaterial). Müşteriden çok açılı stüdyo fotoğrafları gelince Blender'da modellenen
+glTF ile değiştirilecek; `<Bottle />` arayüzü aynı kalır.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Güvenlik ağı: WebGL yoksa veya `prefers-reduced-motion: reduce` ise sahne hiç yüklenmez, yerine
+gerçek ürün fotoğrafı gösterilir. Zayıf cihazlarda (`deviceMemory`/`hardwareConcurrency`) pahalı
+cam malzemesi ve altın tanecikler kapanır.
 
-## Deploy on Vercel
+## Ölçümler (yerel üretim derlemesi)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+| | Canlı site | Bu site |
+|---|---|---|
+| İlk yük | 13,7 MB | **559 KB** |
+| İstek | 58 | 27 |
+| LCP | — | ~0,1 sn (yerel) |
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Kapsam
+
+Faz 1: marka sitesi + katalog + ürün sayfaları. Sepet/ödeme henüz yok — "Satın al" mevcut
+mağazadaki ürün sayfasına gider. Eski `/product-<id>` adresleri yeni slug'lara 301 yönlendirilir
+(`next.config.ts`).
