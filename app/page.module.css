@@ -1,79 +1,11 @@
 .h2 { font-size: var(--step-3); }
-.sectionHead { display: grid; gap: 0.7rem; margin-bottom: clamp(2rem, 5vw, 3.4rem); max-width: 42ch; }
-.sectionLede { max-width: 40ch; }
+.h2 em { font-style: italic; color: var(--gold-deep); }
 
-/* 2 — Damla */
-.drop { padding: clamp(4rem, 10vw, 8rem) 0; }
-.dropInner { display: grid; grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr); gap: clamp(2rem, 6vw, 5rem); align-items: center; }
-.dropMedia { overflow: hidden; background: var(--sand); }
-.dropMedia video { width: 100%; aspect-ratio: 3 / 4; object-fit: cover; }
-.dropCopy { display: grid; gap: 1.1rem; }
-.actives { list-style: none; margin: 0.6rem 0 0; padding: 0; display: grid; gap: 0.85rem; }
-.actives li { display: grid; gap: 0.15rem; padding-bottom: 0.85rem; border-bottom: 1px solid var(--line); }
-.actives strong { font-weight: 500; font-size: var(--step-0); color: var(--espresso); }
-.actives span { color: var(--muted); font-size: var(--step--1); }
-.footnote { font-size: 0.72rem; color: var(--soft); }
-
-/* 4 — Rutin */
-.routine { padding: clamp(4rem, 10vw, 8rem) 0; background: color-mix(in srgb, var(--sand) 38%, var(--ink)); }
-.steps { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: clamp(1rem, 2.5vw, 2rem); counter-reset: step; }
-.steps li { display: grid; gap: 0.45rem; align-content: start; padding-top: 1.1rem; border-top: 1px solid var(--soft); }
-.stepNo { font-size: 0.7rem; letter-spacing: 0.22em; color: var(--gold-deep); }
-.stepTitle { font-size: var(--step-2); }
-.stepNote { color: var(--muted); font-size: var(--step--1); }
-.stepProduct { display: flex; align-items: center; gap: 0.75rem; margin-top: 0.8rem; padding: 0.55rem; background: var(--ink); border: 1px solid var(--line); transition: border-color 0.3s var(--ease); }
-.stepProduct:hover { border-color: var(--gold); }
-.stepProduct img { width: 3.2rem; height: 3.2rem; object-fit: contain; flex: none; }
-.stepProduct span { display: grid; gap: 0.1rem; min-width: 0; }
-.stepProduct em { font-style: normal; font-size: 0.78rem; line-height: 1.3; display: -webkit-box; -webkit-line-clamp: 2; line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
-.stepProduct b { font-weight: 500; font-size: 0.78rem; color: var(--gold-deep); }
-
-/* 5 — Kanıt */
-.proof { padding: clamp(4rem, 10vw, 8rem) 0; }
-.proofInner { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr); gap: clamp(2rem, 6vw, 5rem); align-items: center; }
-.proofFigure { margin: 0; overflow: hidden; }
-.proofFigure img { width: 100%; height: auto; }
-.proofCopy { display: grid; gap: 1rem; }
-.proofText { color: var(--muted); max-width: 38ch; }
-.inciSample { margin-top: 0.8rem; padding: 1.3rem; border: 1px solid var(--line); background: color-mix(in srgb, var(--sand) 30%, var(--ink)); display: grid; gap: 0.7rem; }
-.inciLabel { font-size: 0.66rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold-deep); }
-.inciSample p { font-size: 0.8rem; line-height: 1.75; color: var(--taupe); font-family: var(--font-body), monospace; }
-.inciSample :global(.btn) { justify-self: start; }
-
-/* 7 — Endişeler */
-.concerns { padding: clamp(3.5rem, 8vw, 6rem) 0; }
-.chips { list-style: none; margin: 1.6rem 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 0.6rem; }
-.chips a {
-  display: inline-block; padding: 0.7em 1.4em; border: 1px solid var(--line); border-radius: 999px;
-  font-size: var(--step--1); color: var(--taupe);
-  transition: background 0.35s var(--ease), color 0.35s var(--ease), border-color 0.35s var(--ease);
-}
-.chips a:hover { background: var(--espresso); border-color: var(--espresso); color: var(--ink); }
-
-/* 8 — Öne çıkanlar */
-.featured { padding: clamp(3rem, 8vw, 6rem) 0; }
-.grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: clamp(1rem, 2.5vw, 2rem); }
-.more { margin-top: clamp(2rem, 4vw, 3rem); }
-
-/* 9 — Hikaye */
+/* Hikâye */
 .story { padding: clamp(4rem, 10vw, 8rem) 0; background: color-mix(in srgb, var(--sand) 38%, var(--ink)); }
 .storyInner { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr); gap: clamp(2rem, 6vw, 5rem); align-items: center; }
 .storyCopy { display: grid; gap: 1rem; max-width: 56ch; }
 .storyCopy p { color: var(--muted); }
-.storyFigure { margin: 0; overflow: hidden; }
+.storyFigure { margin: 0; overflow: hidden; border-radius: 20px; }
 .storyFigure img { width: 100%; height: auto; }
-
-/* 10 — Kapanış */
-.cta { padding: clamp(4rem, 10vw, 7rem) 0 0; }
-.ctaInner { text-align: center; display: grid; justify-items: center; gap: 1rem; padding: clamp(3rem, 8vw, 6rem) var(--gutter); background: var(--espresso); color: var(--sand); }
-.ctaTitle { font-size: var(--step-3); color: var(--ink); }
-.ctaText { color: color-mix(in srgb, var(--sand) 75%, transparent); max-width: 34ch; }
-
-@media (max-width: 960px) {
-  .steps { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-}
-@media (max-width: 760px) {
-  .dropInner, .proofInner, .storyInner { grid-template-columns: 1fr; }
-  .proofFigure { order: -1; }
-}
+@media (max-width: 760px) { .storyInner { grid-template-columns: 1fr; } }

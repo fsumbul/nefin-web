@@ -87,3 +87,44 @@ for (const p of products) {
 
 const size = (d) => execFileSync("du", ["-sh", path.join(OUT, d)]).toString().trim();
 console.log(`\n${size("media")}\n${size("urun")}`);
+
+/* ------------------------------------------------------------------ *
+ * v2: aylık içerik sunumundaki medya (müşterinin gördüğü klipler ve
+ * packshot'lar). Kaynak: icerik-vault/01-Presentations/active/nefin-sunum
+ * ------------------------------------------------------------------ */
+const DECK = path.join(VAULT, "01-Presentations/active/nefin-sunum");
+fs.mkdirSync(path.join(OUT, "deck"), { recursive: true });
+
+function deckVideo(name, width = 1280) {
+  const src = path.join(DECK, `${name}.mp4`);
+  if (!fs.existsSync(src)) return console.log(`  ! yok: ${name}.mp4`);
+  const mp4 = path.join(OUT, "deck", `${name}.mp4`);
+  execFileSync("ffmpeg", ["-v", "error", "-y", "-i", src,
+    "-vf", `scale='min(${width},iw)':-2`, "-c:v", "libx264", "-crf", "27", "-preset", "slow",
+    "-profile:v", "high", "-pix_fmt", "yuv420p", "-movflags", "+faststart", "-an", mp4]);
+  const tmp = path.join(OUT, "deck", `${name}-poster.png`);
+  execFileSync("ffmpeg", ["-v", "error", "-y", "-ss", "0.3", "-i", mp4, "-frames:v", "1", tmp]);
+  return sharp(tmp).resize({ width: 1280, withoutEnlargement: true }).webp({ quality: 76 })
+    .toFile(path.join(OUT, "deck", `${name}-poster.webp`))
+    .then(() => { fs.unlinkSync(tmp); console.log(`  ✓ deck/${name}.mp4 ${kb(mp4)} (+poster)`); });
+}
+
+async function deckImage(name, width = 1600, quality = 82) {
+  const src = path.join(DECK, `${name}.jpg`);
+  if (!fs.existsSync(src)) return console.log(`  ! yok: ${name}.jpg`);
+  const base = path.join(OUT, "deck", name);
+  await sharp(src).rotate().resize({ width, withoutEnlargement: true }).webp({ quality }).toFile(`${base}.webp`);
+  console.log(`  ✓ deck/${name}.webp ${kb(`${base}.webp`)}`);
+}
+
+console.log("Sunum klipleri:");
+for (const v of ["bg", "gold", "sun", "cream", "nemli", "vitc", "vitc2", "ret", "dokusu", "drop", "kopuk", "cc", "cilt", "woman_foam"]) {
+  await deckVideo(v);
+}
+console.log("Sunum görselleri:");
+for (const i of ["n_group", "n_gold", "n_goldtonic", "n_serum", "n_cream", "n_acnederm", "n_hand", "n_orange",
+  "p_linen", "p_tray", "p_dropper", "p_hands", "p_eye", "p_cc", "p_sun", "p_foampink", "p_foamwet",
+  "c_woman", "c_serum", "c_gel", "c_cream", "c_foam1", "c_tubes1", "c_tubes2", "img_hand", "img_collagen", "gold"]) {
+  await deckImage(i);
+}
+console.log(size("deck"));

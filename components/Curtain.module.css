@@ -1,0 +1,31 @@
+.curtain {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  background: var(--espresso);
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  animation: lift 0.9s var(--ease-silk) 1.05s forwards;
+  cursor: pointer;
+}
+.bokeh { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.55; }
+.mark { position: relative; display: grid; justify-items: center; gap: 0.5rem; color: var(--ink); }
+.word {
+  font-family: var(--font-display), serif;
+  font-size: clamp(2.2rem, 6vw, 4.2rem);
+  letter-spacing: 0.6em;
+  padding-left: 0.6em;
+  animation: tighten 1.1s var(--ease-out) 0.05s both;
+}
+.sub {
+  font-size: 0.7rem;
+  letter-spacing: 0.5em;
+  padding-left: 0.5em;
+  color: var(--gold);
+  text-transform: lowercase;
+  animation: fadein 0.9s ease 0.5s both;
+}
+@keyframes tighten { from { letter-spacing: 0.9em; opacity: 0; } to { letter-spacing: 0.32em; opacity: 1; } }
+@keyframes fadein { from { opacity: 0; } to { opacity: 1; } }
+@keyframes lift { to { clip-path: inset(0 0 100% 0); } }

@@ -6,7 +6,7 @@
   border-bottom: 1px solid transparent;
 }
 .solid {
-  background: color-mix(in srgb, var(--ink) 82%, transparent);
+  background: color-mix(in srgb, var(--bg) 78%, transparent);
   backdrop-filter: blur(14px) saturate(1.1);
   border-bottom-color: var(--line);
 }
@@ -18,7 +18,8 @@
   font-family: var(--font-display), serif;
   font-size: 1.35rem;
   letter-spacing: 0.26em;
-  color: var(--espresso);
+  color: var(--fg);
+  transition: color 0.5s var(--ease-silk);
 }
 .sub {
   font-size: 0.58rem;
@@ -30,21 +31,21 @@
 }
 
 .nav { display: flex; align-items: center; gap: 1.7rem; font-size: var(--step--1); letter-spacing: 0.06em; }
-.nav a { color: var(--taupe); transition: color 0.3s var(--ease); }
-.nav a:hover { color: var(--espresso); }
+.nav a { color: var(--muted); transition: color 0.3s var(--ease); }
+.nav a:hover { color: var(--fg); }
 .shop {
-  border: 1px solid color-mix(in srgb, var(--espresso) 28%, transparent);
+  border: 1px solid color-mix(in srgb, var(--fg) 28%, transparent);
   border-radius: 999px;
   padding: 0.5em 1.3em;
-  color: var(--espresso) !important;
+  color: var(--fg) !important;
   letter-spacing: 0.14em;
   text-transform: uppercase;
   font-size: 0.7rem;
 }
-.shop:hover { background: var(--espresso); color: var(--ink) !important; }
+.shop:hover { background: var(--fg); color: var(--bg) !important; }
 
 .toggle { display: none; background: none; border: 0; padding: 0.6rem; cursor: pointer; }
-.toggle span { display: block; width: 22px; height: 1px; background: var(--espresso); }
+.toggle span { display: block; width: 22px; height: 1px; background: var(--fg); }
 .toggle span + span { margin-top: 6px; }
 
 @media (max-width: 800px) {
@@ -57,7 +58,7 @@
     align-items: flex-start;
     gap: 1.2rem;
     padding: 1.6rem var(--gutter) 2.2rem;
-    background: var(--ink);
+    background: var(--bg);
     border-bottom: 1px solid var(--line);
     transform: translateY(-8px);
     opacity: 0;

@@ -1,0 +1,53 @@
+{
+  "username": "nefinbeauty",
+  "avatar": "/ig/avatar.webp",
+  "posts": [
+    {
+      "img": "/ig/post-1.webp",
+      "video": true,
+      "status": "taslak"
+    },
+    {
+      "img": "/ig/post-2.webp",
+      "video": false,
+      "status": "taslak"
+    },
+    {
+      "img": "/ig/post-3.webp",
+      "video": false,
+      "status": "taslak"
+    },
+    {
+      "img": "/ig/post-4.webp",
+      "video": true,
+      "status": "taslak"
+    },
+    {
+      "img": "/ig/post-5.webp",
+      "video": false,
+      "status": "taslak"
+    },
+    {
+      "img": "/ig/post-6.webp",
+      "video": true,
+      "status": "taslak"
+    },
+    {
+      "img": "/ig/post-7.webp",
+      "video": false,
+      "status": "taslak"
+    },
+    {
+      "img": "/ig/post-8.webp",
+      "video": true,
+      "status": "taslak"
+    },
+    {
+      "img": "/ig/post-9.webp",
+      "video": true,
+      "status": "taslak"
+    }
+  ],
+  "stories": [],
+  "syncedAt": "2026-09-22"
+}

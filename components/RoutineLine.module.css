@@ -1,0 +1,17 @@
+.section { padding: clamp(4rem, 10vw, 8rem) 0; background: color-mix(in srgb, var(--sand) 38%, var(--ink)); }
+.head { display: grid; gap: 0.6rem; margin-bottom: clamp(2.5rem, 6vw, 4rem); }
+.h2 { font-size: var(--step-3); }
+.grid { position: relative; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: clamp(1rem, 2.5vw, 2rem); padding-top: 2.2rem; }
+.line { position: absolute; left: 0; right: 0; top: 0; width: 100%; height: 40px; }
+.step { position: relative; display: grid; gap: 0.45rem; align-content: start; }
+.dot { position: absolute; top: -2.2rem; left: 50%; width: 10px; height: 10px; border-radius: 50%; background: var(--gold); translate: -50% 15px; box-shadow: 0 0 0 4px color-mix(in srgb, var(--gold) 25%, transparent); }
+.no { font-size: 0.7rem; letter-spacing: 0.22em; color: var(--gold-deep); }
+.title { font-size: var(--step-2); }
+.note { color: var(--muted); font-size: var(--step--1); }
+.card { display: flex; align-items: center; gap: 0.75rem; margin-top: 0.8rem; padding: 0.55rem; border-radius: 14px; transition: translate 0.5s var(--ease-out); }
+.card:hover { translate: 0 -2px; }
+.card img { width: 3.6rem; height: 3.6rem; object-fit: cover; border-radius: 9px; flex: none; }
+.card span { display: grid; gap: 0.1rem; min-width: 0; }
+.card em { font-style: normal; font-size: 0.78rem; line-height: 1.3; display: -webkit-box; -webkit-line-clamp: 2; line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.card b { font-weight: 500; font-size: 0.78rem; color: var(--gold-deep); }
+@media (max-width: 900px) { .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } .line, .dot { display: none; } .grid { padding-top: 0; } }

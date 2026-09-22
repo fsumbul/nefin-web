@@ -5,11 +5,18 @@
 
 .top { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(2rem, 5vw, 4.5rem); align-items: start; }
 
+.galleryCol { display: grid; gap: 0.8rem; position: sticky; top: 6rem; }
 .gallery {
   margin: 0; position: relative; display: grid; place-items: center;
-  aspect-ratio: 1; background: color-mix(in srgb, var(--sand) 42%, var(--ink));
-  border: 1px solid var(--line); position: sticky; top: 6rem;
+  aspect-ratio: 4 / 3; background: color-mix(in srgb, var(--sand) 42%, var(--ink));
+  border: 1px solid var(--line); border-radius: 20px; overflow: hidden;
 }
+.gallery .cover { width: 100%; height: 100%; object-fit: cover; }
+.clip { border-radius: 20px; overflow: hidden; aspect-ratio: 16 / 10; background: var(--sand); }
+.clip video { width: 100%; height: 100%; object-fit: cover; }
+.topic { margin-bottom: -0.4rem; }
+.hook { font-family: var(--font-display), serif; font-style: italic; font-size: var(--step-1); color: var(--gold-deep); }
+.actives { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 0.4rem; }
 .gallery img { width: 78%; height: 78%; object-fit: contain; }
 .badge { position: absolute; top: 1rem; left: 1rem; background: var(--espresso); color: var(--ink); font-size: 0.66rem; letter-spacing: 0.14em; padding: 0.45em 0.9em; border-radius: 999px; }
 
@@ -28,6 +35,6 @@
 
 @media (max-width: 900px) {
   .top { grid-template-columns: 1fr; }
-  .gallery { position: static; }
+  .galleryCol { position: static; }
   .moreGrid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }

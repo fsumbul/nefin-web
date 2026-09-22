@@ -1,14 +1,18 @@
 "use client";
 
 import { useEffect } from "react";
+import type Lenis from "lenis";
+import { gsapReady } from "@/lib/motion";
 
 /**
- * Lenis yumuşak scroll + `.reveal` öğelerinin görünürlükle belirmesi.
- * prefers-reduced-motion açıkken ikisi de devre dışı kalır; sayfa normal scroll'la çalışır.
+ * Hareket kökü: Lenis (yumuşak scroll) + GSAP ScrollTrigger senkronu,
+ * `.reveal` görünürlük belirmesi ve `html.js` sınıfı (satır-maske CSS'i yalnızca JS varken gizler).
+ * prefers-reduced-motion açıkken Lenis ve ScrollTrigger hiç kurulmaz.
  */
 export default function SmoothScroll() {
   useEffect(() => {
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (!reduced) document.documentElement.classList.add("js");
 
     const io = new IntersectionObserver(
       (entries) => {
@@ -25,25 +29,26 @@ export default function SmoothScroll() {
 
     if (reduced) return () => io.disconnect();
 
-    let lenis: { raf: (t: number) => void; destroy: () => void } | null = null;
-    let frame = 0;
+    let lenis: Lenis | null = null;
+    let tick: ((t: number) => void) | null = null;
     let cancelled = false;
+    const { gsap, ScrollTrigger } = gsapReady();
 
-    import("lenis").then(({ default: Lenis }) => {
+    import("lenis").then(({ default: LenisCtor }) => {
       if (cancelled) return;
-      const l = new Lenis({ duration: 1.05, lerp: 0.09, wheelMultiplier: 0.9, touchMultiplier: 1.6 });
+      const l = new LenisCtor({ lerp: 0.09, wheelMultiplier: 0.9, touchMultiplier: 1.6 });
       lenis = l;
-      const raf = (time: number) => {
-        l.raf(time);
-        frame = requestAnimationFrame(raf);
-      };
-      frame = requestAnimationFrame(raf);
+      l.on("scroll", ScrollTrigger.update);
+      tick = (time: number) => l.raf(time * 1000);
+      gsap.ticker.add(tick);
+      gsap.ticker.lagSmoothing(0);
       document.documentElement.dataset.lenis = "on";
+      ScrollTrigger.refresh();
     });
 
     return () => {
       cancelled = true;
-      cancelAnimationFrame(frame);
+      if (tick) gsap.ticker.remove(tick);
       lenis?.destroy();
       io.disconnect();
       delete document.documentElement.dataset.lenis;

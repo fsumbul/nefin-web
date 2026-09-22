@@ -5,6 +5,8 @@ import { notFound } from "next/navigation";
 import ProductCard from "@/components/ProductCard";
 import Accordion from "@/components/Accordion";
 import { bySlug, discount, image, priceTRY, products } from "@/lib/products";
+import { hookFor } from "@/content/hooks";
+import LazyVideo from "@/components/LazyVideo";
 import styles from "./page.module.css";
 
 type Params = { params: Promise<{ slug: string }> };
@@ -32,6 +34,8 @@ export default async function ProductPage({ params }: Params) {
 
   const off = discount(product);
   const others = products.filter((p) => p.id !== product.id).slice(0, 4);
+  const h = hookFor(product.slug);
+  const shot = h?.shot ? `/deck/${h.shot}.webp` : image(product);
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -60,20 +64,23 @@ export default async function ProductPage({ params }: Params) {
       </nav>
 
       <div className={`${styles.top} wrap`}>
-        <figure className={styles.gallery}>
-          <Image
-            src={image(product)}
-            alt={product.title}
-            width={900}
-            height={900}
-            priority
-            sizes="(max-width: 900px) 92vw, 34rem"
-          />
-          {off > 0 && <figcaption className={styles.badge}>%{off} indirim</figcaption>}
-        </figure>
+        <div className={styles.galleryCol}>
+          <figure className={styles.gallery} style={{ viewTransitionName: `card-${product.id}` } as React.CSSProperties}>
+            <Image src={shot} alt={product.title} width={1600} height={1200} priority sizes="(max-width: 900px) 92vw, 34rem" className={h?.shot ? styles.cover : undefined} />
+            {off > 0 && <figcaption className={styles.badge}>%{off} indirim</figcaption>}
+          </figure>
+          {h?.clip && (
+            <div className={styles.clip}>
+              <LazyVideo src={`/deck/${h.clip}.mp4`} poster={`/deck/${h.clip}-poster.webp`} label={`${product.title} videosu`} />
+            </div>
+          )}
+        </div>
 
         <div className={styles.info}>
+          {h && <p className={`eyebrow ${styles.topic}`}>{h.topic}</p>}
           <h1 className={styles.title}>{product.title}</h1>
+          {h && <p className={styles.hook}>{h.hook}</p>}
+          {h && <ul className={styles.actives}>{h.actives.map((a) => <li key={a} className="glass-chip">{a}</li>)}</ul>}
 
           <p className={styles.price}>
             <strong>{priceTRY(product.salePrice)}</strong>

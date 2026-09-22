@@ -29,6 +29,17 @@
   --max: 78rem;
   --radius: 2px;
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  /* hareket sözlüğü — lib/motion.ts ile aynı */
+  --ease-out: cubic-bezier(0.2, 0.7, 0.2, 1);
+  --ease-silk: cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+/* Koyu tema: hero ve kapanışta gövde rengi/zemin geçişi (header buna uyar). */
+body[data-theme="dark"] {
+  --bg: var(--espresso);
+  --fg: var(--ink);
+  --muted: var(--sand);
+  --line: color-mix(in srgb, var(--sand) 22%, transparent);
 }
 
 *,
@@ -47,7 +58,9 @@ body {
   line-height: 1.65;
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
+  transition: background-color 0.6s var(--ease-silk), color 0.6s var(--ease-silk);
 }
+html.curtain-on { overflow: hidden; }
 
 h1, h2, h3, h4 {
   font-family: var(--font-display), Georgia, "Times New Roman", serif;
@@ -103,6 +116,39 @@ button { font: inherit; color: inherit; }
 .btn--ghost:hover { background: var(--espresso); color: var(--ink); }
 .btn--light { background: var(--ink); color: var(--espresso); border-color: var(--ink); }
 .btn--light:hover { background: transparent; color: var(--ink); }
+.btn--gold { background: var(--gold); color: var(--espresso); border-color: var(--gold); }
+.btn--gold:hover { background: transparent; color: var(--gold); }
+.btn--glass { background: rgba(246, 239, 228, 0.12); color: var(--ink); border-color: rgba(246, 239, 228, 0.35); backdrop-filter: blur(14px); }
+.btn--glass:hover { background: rgba(246, 239, 228, 0.22); color: var(--ink); }
+
+/* --- cam paneller (prompt: blur 18 / saturate 1.2 / 1px ışık kenarı / iç ışık) --- */
+.glass {
+  background: rgba(246, 239, 228, 0.14);
+  backdrop-filter: blur(18px) saturate(1.2);
+  -webkit-backdrop-filter: blur(18px) saturate(1.2);
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.35), 0 20px 60px -30px rgba(30, 20, 16, 0.35);
+  border-radius: 20px;
+}
+body:not([data-theme="dark"]) .glass { background: rgba(246, 239, 228, 0.55); }
+.glass-chip {
+  display: inline-flex; align-items: center; padding: 0.5em 1.05em; border-radius: 999px;
+  font-size: var(--step--1); letter-spacing: 0.04em; color: var(--dark); cursor: default;
+  background: rgba(246, 239, 228, 0.5); border: 1px solid rgba(134, 98, 42, 0.28);
+  backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+  transition: background 0.35s var(--ease-silk), color 0.35s var(--ease-silk), border-color 0.35s var(--ease-silk);
+}
+button.glass-chip { cursor: pointer; font: inherit; }
+button.glass-chip:hover { border-color: var(--gold-deep); }
+
+/* --- satır-maske (Reveal) — yalnızca JS varken gizlenir, hareket azaltmada asla --- */
+.lm { display: block; overflow: hidden; }
+[data-line] { display: block; }
+html.js [data-line] { transform: translateY(110%); opacity: 0; }
+@media (prefers-reduced-motion: reduce) { html.js [data-line] { transform: none; opacity: 1; } }
+
+/* --- sayfa geçişleri (yalnızca aynı belge içi: ihtiyaç filtresi yeniden dizilişi) --- */
+::view-transition-old(root), ::view-transition-new(root) { animation-duration: 0.45s; animation-timing-function: var(--ease-silk); }
 
 /* --- scroll ile beliren öğeler --- */
 .reveal {

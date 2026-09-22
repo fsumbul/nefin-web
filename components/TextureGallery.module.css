@@ -1,0 +1,25 @@
+.section { padding: clamp(4rem, 10vw, 8rem) 0; background: var(--espresso); color: var(--sand); }
+.head { display: grid; gap: 0.6rem; margin-bottom: clamp(1.6rem, 4vw, 2.6rem); }
+.section :global(.eyebrow) { color: var(--gold); }
+.h2 { font-size: var(--step-3); color: var(--ink); }
+.h2 em { font-style: italic; color: var(--gold); }
+.hint { font-size: 0.7rem; letter-spacing: 0.22em; text-transform: uppercase; color: color-mix(in srgb, var(--sand) 55%, transparent); }
+
+.track {
+  list-style: none; margin: 0; padding: 0 max(var(--gutter), calc((100vw - var(--max)) / 2)) 1rem;
+  display: flex; gap: clamp(0.8rem, 1.6vw, 1.2rem);
+  overflow-x: auto; scroll-snap-type: x proximity; scrollbar-width: none; cursor: grab;
+}
+.track::-webkit-scrollbar { display: none; }
+.drag { cursor: grabbing; scroll-snap-type: none; }
+.track:focus-visible { outline: 2px solid var(--gold); outline-offset: 6px; }
+
+.item { position: relative; flex: 0 0 auto; width: clamp(14rem, 26vw, 20rem); aspect-ratio: 3 / 4; border-radius: 18px; overflow: hidden; scroll-snap-align: start; background: #120c09; }
+.item video { width: 100%; height: 100%; object-fit: cover; transition: scale 1.2s var(--ease-out); }
+.item:hover video { scale: 1.04; }
+.caption {
+  position: absolute; left: 12px; right: 12px; bottom: 12px;
+  display: grid; gap: 0.1rem; padding: 0.7rem 0.9rem; border-radius: 14px; color: var(--ink);
+}
+.caption strong { font-family: var(--font-display), serif; font-weight: 400; font-size: var(--step-0); }
+.caption span { font-size: 0.72rem; color: color-mix(in srgb, var(--sand) 80%, transparent); }
