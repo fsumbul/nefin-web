@@ -52,15 +52,3 @@ export function revealMedia(el: Element) {
     { clipPath: "inset(0% 0 0 0)", scale: 1, duration: 1.15, ease: easeOut, scrollTrigger: { trigger: el, start: "top 85%", once: true } }
   );
 }
-
-/** Bölüm görünürlüğüyle body[data-theme] değişimi (header + zemin uyar). */
-export function themeOnEnter(el: Element, theme: "dark" | "light") {
-  const { ScrollTrigger } = gsapReady();
-  return ScrollTrigger.create({
-    trigger: el,
-    start: "top 45%",
-    end: "bottom 45%",
-    onEnter: () => (document.body.dataset.theme = theme),
-    onEnterBack: () => (document.body.dataset.theme = theme),
-  });
-}

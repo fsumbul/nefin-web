@@ -32,7 +32,7 @@ export default function ProofGlass({ inci, productTitle, href }: { inci: string;
         <Image src="/deck/p_linen.webp" alt="" fill sizes="100vw" />
       </div>
       <div className={`${styles.inner} wrap`}>
-        <div className={`${styles.panel} glass`}>
+        <div className={`${styles.panel} glass glass--light`}>
           <p className="eyebrow">Kanıt</p>
           <Reveal as="h2" id="kanit-baslik" className={styles.h2} lines={["Her ürünün tam", "INCI listesi açık."]} />
           <p className={styles.text}>

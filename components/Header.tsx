@@ -23,7 +23,7 @@ export default function Header() {
   }, []);
 
   return (
-    <header className={`${styles.header} ${solid ? styles.solid : ""}`}>
+    <header className={`site-header ${styles.header} ${solid ? styles.solid : ""}`}>
       <div className={`${styles.bar} wrap`}>
         <Link href="/" className={styles.logo} aria-label="Nefin Beauty ana sayfa">
           {/* Geçici wordmark — müşteriden orijinal logo SVG'si beklenirken kullanılıyor. */}

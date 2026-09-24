@@ -40,10 +40,10 @@ export default function ProductStory({ products }: { products: Product[] }) {
   }, [active]);
 
   return (
-    <section ref={root} className={styles.section} aria-labelledby="hikaye-baslik">
+    <section ref={root} className={styles.section} aria-labelledby="urun-hikaye-baslik">
       <div className={`${styles.head} wrap`}>
         <p className="eyebrow reveal">Ürün hikâyesi</p>
-        <Reveal as="h2" id="hikaye-baslik" className={styles.h2} lines={["Her ürünün", "bir sorusu var."]} />
+        <Reveal as="h2" id="urun-hikaye-baslik" className={styles.h2} lines={["Her ürünün", "bir sorusu var."]} />
       </div>
 
       <div className={`${styles.layout} wrap`}>

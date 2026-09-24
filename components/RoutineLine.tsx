@@ -48,7 +48,7 @@ export default function RoutineLine() {
                 <h3 className={styles.title}>{r.title}</h3>
                 <p className={styles.note}>{r.note}</p>
                 {r.product && (
-                  <Link href={`/urun/${r.product.slug}`} className={`${styles.card} glass`}>
+                  <Link href={`/urun/${r.product.slug}`} className={`${styles.card} glass glass--light`}>
                     <Image src={src} alt="" width={400} height={300} sizes="10rem" />
                     <span><em>{r.product.title}</em><b>{priceTRY(r.product.salePrice)}</b></span>
                   </Link>

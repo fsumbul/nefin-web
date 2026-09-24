@@ -33,7 +33,7 @@ export default function TextureGallery() {
   }, []);
 
   return (
-    <section className={styles.section} aria-labelledby="doku-baslik">
+    <section className={styles.section} data-theme="dark" aria-labelledby="doku-baslik">
       <div className={`${styles.head} wrap`}>
         <p className="eyebrow reveal">Doku ve his</p>
         <Reveal as="h2" id="doku-baslik" className={styles.h2} lines={[<span key="a"><em>Ciltte</em> nasıl</span>, "hissettirir?"]} />

@@ -24,6 +24,7 @@
   display: grid; gap: 1rem; justify-items: start;
   color: var(--ink);
 }
+.copyInner { display: grid; gap: 1rem; justify-items: start; }
 .eyebrow { color: var(--gold); }
 .title {
   color: var(--ink);

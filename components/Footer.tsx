@@ -3,7 +3,7 @@ import styles from "./Footer.module.css";
 
 export default function Footer() {
   return (
-    <footer className={styles.footer}>
+    <footer className={styles.footer} data-theme="dark">
       <div className={`${styles.inner} wrap`}>
         <div className={styles.brand}>
           <span className={styles.mark}>NEFIN</span>
